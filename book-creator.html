@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -161,27 +162,82 @@ Your generated content will appear here.
 </section>
 
 <script>
+const SUPABASE_URL = "https://jmzgxexdfgpumekoswgh.supabase.co";
+const SUPABASE_KEY = "sb_publishable_zjy98CSFllj7JIA-ynqOWg__PlZ0456";
 
-function generateBook(){
+const db = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
-const title=document.getElementById("title").value;
+async function generateBook() {
+  const title = document.getElementById("title").value.trim();
+  const language = document.getElementById("language").value;
+  const description = document.getElementById("description").value.trim();
+  const result = document.getElementById("result");
 
-const language=document.getElementById("language").value;
+  if (!title || !description) {
+    result.innerHTML = "Please enter a book title and description.";
+    return;
+  }
 
-const description=document.getElementById("description").value;
+  result.innerHTML = "Saving project...";
 
-document.getElementById("result").innerHTML=
+  const {
+    data: { session }
+  } = await db.auth.getSession();
 
-"<h2>"+title+"</h2><br>" +
+  if (!session) {
+    result.innerHTML =
+      "Please sign in before creating a book.";
+    return;
+  }
 
-"<b>Language:</b> "+language+"<br><br>"+
+  const { data, error } = await db
+    .from("books")
+    .insert([
+      {
+        title: title,
+        language: language,
+        description: description,
+        content: "",
+        status: "draft"
+      }
+    ])
+    .select();
 
-"<b>Description:</b><br>"+description+
+  if (error) {
+    console.error(error);
+    result.innerHTML =
+      "Could not save the project: " + error.message;
+    return;
+  }
 
-"<br><br><i>Next step: connect OpenAI API.</i>";
-
+  result.innerHTML = `
+    <h2>${escapeHtml(title)}</h2>
+    <br>
+    <b>Language:</b> ${escapeHtml(language)}
+    <br><br>
+    <b>Description:</b><br>
+    ${escapeHtml(description)}
+    <br><br>
+    <strong>✅ Project saved to Bosak AI.</strong>
+  `;
 }
 
+function escapeHtml(value) {
+  return value.replace(/[&<>"']/g, function(char) {
+    const map = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    };
+
+    return map[char];
+  });
+}
 </script>
 
 </body>
