@@ -1,51 +1,554 @@
-Bosak AI
-═══════════════════════
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Bosak AI — AI tools for creators, entrepreneurs, publishers and businesses."
+  />
+  <title>Bosak AI — The World's AI Workforce</title>
 
-The World's AI Workforce
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-The first AI platform designed to help creators,
-entrepreneurs and businesses automate their work.
+    html {
+      scroll-behavior: smooth;
+    }
 
-[ Start Free ]
-[ Sign In ]
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(124, 58, 237, 0.22), transparent 35%),
+        radial-gradient(circle at top right, rgba(37, 99, 235, 0.18), transparent 35%),
+        #070b16;
+      color: #ffffff;
+      line-height: 1.6;
+    }
 
-──────────────────────
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-🚀 AI Book Creator
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
 
-Create books in minutes.
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(16px);
+      background: rgba(7, 11, 22, 0.78);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
 
-──────────────────────
+    nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
 
-🎨 Cover Designer
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+    }
 
-Generate professional book covers.
+    .logo span {
+      color: #8b5cf6;
+    }
 
-──────────────────────
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      color: #cbd5e1;
+      font-size: 15px;
+    }
 
-📚 Amazon KDP Publisher
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-Prepare books for publishing.
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
 
-──────────────────────
+    .btn-primary {
+      background: linear-gradient(135deg, #7c3aed, #4f46e5);
+      box-shadow: 0 14px 40px rgba(79, 70, 229, 0.3);
+    }
 
-🤖 Business Assistant
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
 
-Automate repetitive business tasks.
+    .btn-secondary {
+      border-color: rgba(255, 255, 255, 0.15);
+      color: #e2e8f0;
+      background: rgba(255, 255, 255, 0.04);
+    }
 
-──────────────────────
+    .hero {
+      padding: 110px 0 80px;
+      text-align: center;
+    }
 
-Pricing
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(139, 92, 246, 0.35);
+      background: rgba(139, 92, 246, 0.1);
+      color: #c4b5fd;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
 
-Starter
-Free
+    h1 {
+      font-size: clamp(48px, 8vw, 88px);
+      line-height: 0.98;
+      letter-spacing: -4px;
+      max-width: 950px;
+      margin: 0 auto;
+    }
 
-Pro
-$29/month
+    .gradient-text {
+      background: linear-gradient(90deg, #a78bfa, #60a5fa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
 
-Enterprise
-Let's Talk
+    .hero p {
+      max-width: 720px;
+      margin: 28px auto 0;
+      font-size: 20px;
+      color: #aeb8cc;
+    }
 
-──────────────────────
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 34px;
+      flex-wrap: wrap;
+    }
 
-© 2026 Bosak AI
+    .hero-note {
+      margin-top: 18px;
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    section {
+      padding: 78px 0;
+    }
+
+    .section-heading {
+      max-width: 680px;
+      margin-bottom: 36px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(34px, 5vw, 54px);
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 14px;
+    }
+
+    .section-heading p {
+      color: #94a3b8;
+      font-size: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      padding: 28px;
+      border-radius: 24px;
+      background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.07),
+        rgba(255, 255, 255, 0.025)
+      );
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0.05);
+    }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: rgba(124, 58, 237, 0.14);
+      font-size: 25px;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: #94a3b8;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .price-card {
+      padding: 30px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .price-card.featured {
+      border-color: #7c3aed;
+      background: linear-gradient(
+        180deg,
+        rgba(124, 58, 237, 0.18),
+        rgba(255, 255, 255, 0.045)
+      );
+    }
+
+    .price-card h3 {
+      font-size: 22px;
+    }
+
+    .price {
+      font-size: 42px;
+      font-weight: 800;
+      margin: 16px 0 4px;
+    }
+
+    .price small {
+      font-size: 15px;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .price-card p {
+      color: #94a3b8;
+      margin-bottom: 20px;
+    }
+
+    .features {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      margin-bottom: 24px;
+      color: #cbd5e1;
+    }
+
+    .features li::before {
+      content: "✓";
+      color: #a78bfa;
+      margin-right: 9px;
+      font-weight: 800;
+    }
+
+    .cta {
+      text-align: center;
+      padding: 55px 28px;
+      border-radius: 28px;
+      background: linear-gradient(
+        135deg,
+        rgba(124, 58, 237, 0.22),
+        rgba(37, 99, 235, 0.16)
+      );
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .cta h2 {
+      font-size: clamp(34px, 5vw, 54px);
+      letter-spacing: -2px;
+      margin-bottom: 12px;
+    }
+
+    .cta p {
+      color: #aeb8cc;
+      max-width: 640px;
+      margin: 0 auto 26px;
+    }
+
+    footer {
+      padding: 34px 0 44px;
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 760px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-actions .btn-secondary {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 82px;
+      }
+
+      h1 {
+        letter-spacing: -2.5px;
+      }
+
+      .grid,
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card,
+      .price-card {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <a href="#" class="logo">Bosak <span>AI</span></a>
+
+      <div class="nav-links">
+        <a href="#agents">AI Agents</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#about">About</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="#" class="btn btn-secondary">Sign In</a>
+        <a href="#pricing" class="btn btn-primary">Start Free</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="container">
+
+      <div class="badge">AI-powered workforce for creators & businesses</div>
+
+      <h1>
+        Your work.
+        <span class="gradient-text">Automated by AI.</span>
+      </h1>
+
+      <p>
+        Bosak AI gives creators, publishers and businesses specialized AI agents
+        that help create, automate, publish and grow.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#agents" class="btn btn-primary">Explore AI Agents</a>
+        <a href="#pricing" class="btn btn-secondary">View Pricing</a>
+      </div>
+
+      <div class="hero-note">
+        Start free. No credit card required.
+      </div>
+
+    </div>
+  </section>
+
+  <section id="agents">
+    <div class="container">
+
+      <div class="section-heading">
+        <h2>Meet your AI workforce.</h2>
+        <p>
+          Purpose-built AI agents designed to handle real work instead of only
+          answering questions.
+        </p>
+      </div>
+
+      <div class="grid">
+
+        <article class="card">
+          <div class="icon">📚</div>
+          <h3>AI Book Creator</h3>
+          <p>
+            Plan books, generate content, organize chapters and turn ideas into
+            publish-ready projects.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="icon">🎨</div>
+          <h3>Cover Designer</h3>
+          <p>
+            Create professional concepts and visual directions for book covers
+            and publishing projects.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="icon">🚀</div>
+          <h3>KDP Publishing Assistant</h3>
+          <p>
+            Prepare descriptions, keywords, categories and publishing metadata
+            for Amazon KDP.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="icon">💼</div>
+          <h3>Business Assistant</h3>
+          <p>
+            Automate repetitive business tasks, planning, communication and
+            everyday workflows.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="icon">📈</div>
+          <h3>Marketing Agent</h3>
+          <p>
+            Generate campaigns, product positioning, content ideas and growth
+            strategies.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="icon">🤖</div>
+          <h3>Custom AI Agent</h3>
+          <p>
+            Create a specialized AI worker designed around your own workflow.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="container">
+
+      <div class="section-heading">
+        <h2>Simple pricing.</h2>
+        <p>
+          Start free and upgrade when you need more AI power.
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+
+        <div class="price-card">
+          <h3>Starter</h3>
+          <div class="price">$0</div>
+          <p>Try Bosak AI and create your first projects.</p>
+
+          <ul class="features">
+            <li>Basic AI tools</li>
+            <li>Limited monthly usage</li>
+            <li>Project dashboard</li>
+          </ul>
+
+          <a href="#" class="btn btn-secondary">Start Free</a>
+        </div>
+
+        <div class="price-card featured">
+          <h3>Pro</h3>
+          <div class="price">$29 <small>/ month</small></div>
+          <p>For creators and entrepreneurs who want to automate more.</p>
+
+          <ul class="features">
+            <li>All core AI agents</li>
+            <li>Higher usage limits</li>
+            <li>Publishing tools</li>
+            <li>Priority generation</li>
+          </ul>
+
+          <a href="#" class="btn btn-primary">Choose Pro</a>
+        </div>
+
+        <div class="price-card">
+          <h3>Business</h3>
+          <div class="price">$99 <small>/ month</small></div>
+          <p>For teams that need AI workflows and automation.</p>
+
+          <ul class="features">
+            <li>Everything in Pro</li>
+            <li>Business AI agents</li>
+            <li>Team access</li>
+            <li>Priority support</li>
+          </ul>
+
+          <a href="#" class="btn btn-secondary">Get Started</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+
+      <div class="cta">
+        <h2>Build less manually. Create more.</h2>
+
+        <p>
+          Bosak AI is building specialized AI employees that help people turn
+          ideas into finished work faster.
+        </p>
+
+        <a href="#agents" class="btn btn-primary">Start Building</a>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-row">
+    <div>© 2026 Bosak AI. All rights reserved.</div>
+    <div>Privacy · Terms · Contact</div>
+  </div>
+</footer>
+
+</body>
+</html>
