@@ -1,244 +1,405 @@
 <!DOCTYPE html>
 <html lang="en">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bosak AI - Book Creator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
+  <title>Bosak AI - Book Creator</title>
 
-body{
-background:#070b16;
-color:white;
-}
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-header{
-padding:20px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:#0d1224;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-.logo{
-font-size:28px;
-font-weight:bold;
-color:#9b5cff;
-}
+    body {
+      background: #070b16;
+      color: white;
+      min-height: 100vh;
+    }
 
-a{
-color:white;
-text-decoration:none;
-}
+    header {
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0d1224;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
 
-.hero{
-max-width:900px;
-margin:80px auto;
-text-align:center;
-padding:20px;
-}
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #9b5cff;
+    }
 
-.hero h1{
-font-size:56px;
-margin-bottom:20px;
-}
+    a {
+      color: white;
+      text-decoration: none;
+    }
 
-.hero p{
-font-size:22px;
-color:#c7c7c7;
-margin-bottom:40px;
-}
+    a:hover {
+      color: #b99cff;
+    }
 
-.form{
-background:#11182c;
-padding:30px;
-border-radius:20px;
-text-align:left;
-}
+    .hero {
+      max-width: 900px;
+      margin: 80px auto;
+      text-align: center;
+      padding: 20px;
+    }
 
-label{
-display:block;
-margin-top:20px;
-margin-bottom:8px;
-}
+    .hero h1 {
+      font-size: 56px;
+      margin-bottom: 20px;
+    }
 
-input,
-select,
-textarea{
-width:100%;
-padding:15px;
-border:none;
-border-radius:12px;
-background:#1a2340;
-color:white;
-font-size:16px;
-}
+    .hero p {
+      font-size: 22px;
+      color: #c7c7c7;
+      margin-bottom: 40px;
+    }
 
-button{
-margin-top:30px;
-width:100%;
-padding:18px;
-font-size:20px;
-background:#7b4dff;
-color:white;
-border:none;
-border-radius:14px;
-cursor:pointer;
-}
+    .form {
+      background: #11182c;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: left;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
 
-button:hover{
-background:#6b3dff;
-}
+    label {
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
 
-.result{
-margin-top:40px;
-background:#11182c;
-padding:20px;
-border-radius:16px;
-min-height:150px;
-}
-</style>
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      background: #1a2340;
+      color: white;
+      font-size: 16px;
+      outline: none;
+    }
 
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #7b4dff;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 30px;
+      width: 100%;
+      padding: 18px;
+      font-size: 20px;
+      font-weight: 600;
+      background: #7b4dff;
+      color: white;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #6b3dff;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .result {
+      margin-top: 40px;
+      background: #11182c;
+      padding: 24px;
+      border-radius: 16px;
+      min-height: 150px;
+      text-align: left;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: #d9deea;
+    }
+
+    .success {
+      color: #86efac;
+    }
+
+    .error {
+      color: #fca5a5;
+    }
+
+    .notice {
+      color: #fde68a;
+    }
+
+    @media (max-width: 700px) {
+      .hero {
+        margin: 40px auto;
+      }
+
+      .hero h1 {
+        font-size: 40px;
+      }
+
+      .hero p {
+        font-size: 18px;
+      }
+
+      .form {
+        padding: 22px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
+  <header>
+    <div class="logo">Bosak AI</div>
 
-<div class="logo">
-Bosak AI
-</div>
+    <a href="index.html">
+      ← Back
+    </a>
+  </header>
 
-<a href="index.html">
-← Back
-</a>
+  <main>
+    <section class="hero">
 
-</header>
+      <h1>AI Book Creator</h1>
 
-<section class="hero">
+      <p>
+        Create and save your next book project with Bosak AI.
+      </p>
 
-<h1>AI Book Creator</h1>
+      <div class="form">
 
-<p>
-Generate books in minutes.
-</p>
+        <label for="title">Book Title</label>
+        <input
+          id="title"
+          type="text"
+          placeholder="Example: Ukrainian Valentine’s Day Coloring Book"
+          autocomplete="off"
+        >
 
-<div class="form">
+        <label for="language">Language</label>
+        <select id="language">
+          <option value="English">English</option>
+          <option value="Українська">Українська</option>
+          <option value="Polski">Polski</option>
+        </select>
 
-<label>Book Title</label>
-<input id="title">
+        <label for="description">Book Description</label>
+        <textarea
+          id="description"
+          rows="6"
+          placeholder="Describe the book you want to create..."
+        ></textarea>
 
-<label>Language</label>
+        <button id="generateButton" type="button">
+          Generate Book
+        </button>
 
-<select id="language">
-<option>English</option>
-<option>Українська</option>
-<option>Polski</option>
-</select>
+      </div>
 
-<label>Book Description</label>
+      <div class="result" id="result">
+        Your generated content will appear here.
+      </div>
 
-<textarea id="description" rows="6"></textarea>
+    </section>
+  </main>
 
-<button onclick="generateBook()">
-Generate Book
-</button>
+  <script>
+    const SUPABASE_URL =
+      "https://jmzgxexdfgpumekoswgh.supabase.co";
 
-</div>
+    const SUPABASE_KEY =
+      "sb_publishable_zjy98CSFllj7JIA-ynqOWg__PlZ0456";
 
-<div class="result" id="result">
+    const db = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
 
-Your generated content will appear here.
+    const generateButton =
+      document.getElementById("generateButton");
 
-</div>
+    generateButton.addEventListener(
+      "click",
+      generateBook
+    );
 
-</section>
+    async function generateBook() {
+      const title =
+        document.getElementById("title").value.trim();
 
-<script>
-const SUPABASE_URL = "https://jmzgxexdfgpumekoswgh.supabase.co";
-const SUPABASE_KEY = "sb_publishable_zjy98CSFllj7JIA-ynqOWg__PlZ0456";
+      const language =
+        document.getElementById("language").value;
 
-const db = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+      const description =
+        document.getElementById("description").value.trim();
 
-async function generateBook() {
-  const title = document.getElementById("title").value.trim();
-  const language = document.getElementById("language").value;
-  const description = document.getElementById("description").value.trim();
-  const result = document.getElementById("result");
+      const result =
+        document.getElementById("result");
 
-  if (!title || !description) {
-    result.innerHTML = "Please enter a book title and description.";
-    return;
-  }
+      if (!title || !description) {
+        showMessage(
+          "Please enter a book title and description.",
+          "error"
+        );
 
-  result.innerHTML = "Saving project...";
-
-  const {
-    data: { session }
-  } = await db.auth.getSession();
-
-  if (!session) {
-    result.innerHTML =
-      "Please sign in before creating a book.";
-    return;
-  }
-
-  const { data, error } = await db
-    .from("books")
-    .insert([
-      {
-        title: title,
-        language: language,
-        description: description,
-        content: "",
-        status: "draft"
+        return;
       }
-    ])
-    .select();
 
-  if (error) {
-    console.error(error);
-    result.innerHTML =
-      "Could not save the project: " + error.message;
-    return;
-  }
+      setLoading(true);
 
-  result.innerHTML = `
-    <h2>${escapeHtml(title)}</h2>
-    <br>
-    <b>Language:</b> ${escapeHtml(language)}
-    <br><br>
-    <b>Description:</b><br>
-    ${escapeHtml(description)}
-    <br><br>
-    <strong>✅ Project saved to Bosak AI.</strong>
-  `;
-}
+      showMessage(
+        "Checking your account...",
+        "notice"
+      );
 
-function escapeHtml(value) {
-  return value.replace(/[&<>"']/g, function(char) {
-    const map = {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;"
-    };
+      try {
+        const {
+          data: { session },
+          error: sessionError
+        } = await db.auth.getSession();
 
-    return map[char];
-  });
-}
-</script>
+        if (sessionError) {
+          throw sessionError;
+        }
+
+        if (!session) {
+          showMessage(
+            'Please sign in before creating a book.<br><br><a href="login.html">Go to Sign In →</a>',
+            "notice"
+          );
+
+          return;
+        }
+
+        showMessage(
+          "Saving your book project...",
+          "notice"
+        );
+
+        const { data, error } = await db
+          .from("books")
+          .insert([
+            {
+              title: title,
+              language: language,
+              description: description,
+              content: "",
+              status: "draft"
+            }
+          ])
+          .select();
+
+        if (error) {
+          throw error;
+        }
+
+        result.innerHTML = `
+          <h2>${escapeHtml(title)}</h2>
+
+          <br>
+
+          <strong>Language:</strong>
+          ${escapeHtml(language)}
+
+          <br><br>
+
+          <strong>Description:</strong>
+
+          <br>
+
+          ${escapeHtml(description)}
+
+          <br><br>
+
+          <strong class="success">
+            ✅ Project saved to Bosak AI.
+          </strong>
+        `;
+
+        console.log(
+          "Saved project:",
+          data
+        );
+
+      } catch (error) {
+        console.error(error);
+
+        showMessage(
+          "Could not save the project: " +
+          escapeHtml(error.message || "Unknown error"),
+          "error"
+        );
+
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    function showMessage(
+      message,
+      type = ""
+    ) {
+      const result =
+        document.getElementById("result");
+
+      result.className =
+        "result " + type;
+
+      result.innerHTML =
+        message;
+    }
+
+    function setLoading(isLoading) {
+      generateButton.disabled =
+        isLoading;
+
+      generateButton.textContent =
+        isLoading
+          ? "Working..."
+          : "Generate Book";
+    }
+
+    function escapeHtml(value) {
+      const text =
+        String(value ?? "");
+
+      return text.replace(
+        /[&<>"']/g,
+        function (char) {
+          const map = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+          };
+
+          return map[char];
+        }
+      );
+    }
+  </script>
 
 </body>
 </html>
