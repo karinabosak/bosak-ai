@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bosak AI - Book Creator</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#070b16;
+color:white;
+}
+
+header{
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#0d1224;
+}
+
+.logo{
+font-size:28px;
+font-weight:bold;
+color:#9b5cff;
+}
+
+a{
+color:white;
+text-decoration:none;
+}
+
+.hero{
+max-width:900px;
+margin:80px auto;
+text-align:center;
+padding:20px;
+}
+
+.hero h1{
+font-size:56px;
+margin-bottom:20px;
+}
+
+.hero p{
+font-size:22px;
+color:#c7c7c7;
+margin-bottom:40px;
+}
+
+.form{
+background:#11182c;
+padding:30px;
+border-radius:20px;
+text-align:left;
+}
+
+label{
+display:block;
+margin-top:20px;
+margin-bottom:8px;
+}
+
+input,
+select,
+textarea{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+background:#1a2340;
+color:white;
+font-size:16px;
+}
+
+button{
+margin-top:30px;
+width:100%;
+padding:18px;
+font-size:20px;
+background:#7b4dff;
+color:white;
+border:none;
+border-radius:14px;
+cursor:pointer;
+}
+
+button:hover{
+background:#6b3dff;
+}
+
+.result{
+margin-top:40px;
+background:#11182c;
+padding:20px;
+border-radius:16px;
+min-height:150px;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+Bosak AI
+</div>
+
+<a href="index.html">
+← Back
+</a>
+
+</header>
+
+<section class="hero">
+
+<h1>AI Book Creator</h1>
+
+<p>
+Generate books in minutes.
+</p>
+
+<div class="form">
+
+<label>Book Title</label>
+<input id="title">
+
+<label>Language</label>
+
+<select id="language">
+<option>English</option>
+<option>Українська</option>
+<option>Polski</option>
+</select>
+
+<label>Book Description</label>
+
+<textarea id="description" rows="6"></textarea>
+
+<button onclick="generateBook()">
+Generate Book
+</button>
+
+</div>
+
+<div class="result" id="result">
+
+Your generated content will appear here.
+
+</div>
+
+</section>
+
+<script>
+
+function generateBook(){
+
+const title=document.getElementById("title").value;
+
+const language=document.getElementById("language").value;
+
+const description=document.getElementById("description").value;
+
+document.getElementById("result").innerHTML=
+
+"<h2>"+title+"</h2><br>" +
+
+"<b>Language:</b> "+language+"<br><br>"+
+
+"<b>Description:</b><br>"+description+
+
+"<br><br><i>Next step: connect OpenAI API.</i>";
+
+}
+
+</script>
+
+</body>
+</html>
